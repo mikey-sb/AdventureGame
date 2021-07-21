@@ -81,5 +81,33 @@ public abstract class Room {
         return isDead;
     }
 
+    public boolean dropTreasure(PlayableCharacter character){
+        Boolean drop = false;
+        if(character.getHealth() <= 0){
+            drop = true;
+        }
+        return drop;
+    }
 
+    public void addDroppedTreasureToRoom(){
+        for(PlayableCharacter enemy: roomEnemies){
+            if(dropTreasure(enemy)){
+                if(enemy.getTreasures().size() > 0){
+                    roomTreasures.addAll(enemy.getTreasures());
+                }
+            }
+        }
+    }
+
+    public void addDroppedTreasureToPlayerInventory(PlayableCharacter player){
+        int remainingHealth = 0;
+        for(PlayableCharacter enemy: roomEnemies){
+            remainingHealth += enemy.getHealth();
+        }
+        if(remainingHealth <= 0){
+            for(Treasure treasure: roomTreasures){
+                player.addTreasureToInventory(treasure);
+            }
+        }
+    }
 }
