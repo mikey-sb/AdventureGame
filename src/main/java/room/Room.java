@@ -57,16 +57,20 @@ public abstract class Room {
         source.lowerStamina(source.getWeapons().get(0).getStamina());
     }
 
-    public void isEnemyDead(PlayableCharacter target){
+    public Boolean isEnemyDead(PlayableCharacter target){
+        Boolean isDead = false;
         if(isCharacterDead(target)){
-            removeEnemyFromRoom(target);
+            isDead = true;
         }
+        return isDead;
     }
 
-     public void isPlayerDead(PlayableCharacter target){
+     public Boolean isPlayerDead(PlayableCharacter target){
+        Boolean isDead = false;
         if(isCharacterDead(target)) {
-            removePlayerFromRoom(target);
-         };
+            isDead = true;
+         }
+        return isDead;
      }
 
     public Boolean isCharacterDead(PlayableCharacter character){

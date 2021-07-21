@@ -35,7 +35,6 @@ public class EncounterRoomTest {
 
     @Test
     public void charactersCanBeAddedToEncounterRoom(){
-
         assertEquals(3, encounterRoom.getRoomPlayers().size());
         assertEquals(3, encounterRoom.getRoomEnemies().size());
     }
@@ -60,22 +59,22 @@ public class EncounterRoomTest {
         encounterRoom.attack(knight, orc);
         encounterRoom.attack(knight, orc);
         encounterRoom.attack(knight, orc);
-        encounterRoom.isEnemyDead(orc);
-        assertEquals(2, encounterRoom.getRoomEnemies().size());
+        assertEquals(true, encounterRoom.isEnemyDead(orc));
     }
 
     @Test
     public void enemyCanBeAttackedButNotRemovedFromRoom(){
         encounterRoom.attack(knight, orc);
-        assertEquals(3, encounterRoom.getRoomEnemies().size());
+        assertEquals(false, encounterRoom.isEnemyDead(orc));
     }
 
     @Test
     public void playerCanBeKilled(){
         encounterRoom.attack(dragon, cleric);
-        encounterRoom.isPlayerDead(cleric);
-        assertEquals(false, encounterRoom.getRoomPlayers().contains(cleric));
+        assertEquals(true, encounterRoom.isPlayerDead(cleric));
     }
+
+
 
 }
 
